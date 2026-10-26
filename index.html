@@ -26,7 +26,8 @@ h1{font-size:clamp(30px,4.4vw,50px);line-height:1.24;margin:0 0 14px;font-weight
 h1 em{font-style:normal;color:var(--acc)}
 .sub{color:var(--mut);font-size:16px;max-width:780px}
 .byline{margin-top:22px;color:var(--mut);font-size:14px;border-left:2px solid var(--acc);padding-left:14px}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:14px;margin-top:44px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:44px}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px}
 .kpi .v{font-size:30px;font-weight:700;color:var(--acc);line-height:1.1;font-variant-numeric:tabular-nums}
 .kpi .k{font-size:13px;color:var(--mut);margin-top:7px}
@@ -159,7 +160,7 @@ code{background:#0A1412;border:1px solid var(--line);padding:2px 7px;border-radi
 <header class="hero"><div class="wrap">
   <h1>澳門古樹集合</h1>
   <p class="sub">以澳門市政署「澳門古樹名木」公開資料庫的 658 棵已登記古樹逐筆記錄，分析堂區分佈、樹種結構、
-  樹齡與健康風險，並用最小平方法建立樹高與冠幅的數學模型。
+  樹齡與健康風險。
   <b style="color:var(--acc)">每一棵樹都可以點開</b>，查看它的編號、樹種、樹齡、樹高、胸徑、冠幅、健康狀況、所在堂區與官方照片。</p>
   <div class="byline">2026 學年高中專題研習　｜　澳門市政署古樹名木公開資料<br>
   資料下載日期 2026-09-24　｜　資料來源：https://www.iam.gov.mo/nature/c/tree</div>
@@ -168,8 +169,7 @@ code{background:#0A1412;border:1px solid var(--line);padding:2px 7px;border-radi
 
 <nav><div class="wrap">
   <a href="#s1">一、堂區分佈</a><a href="#s2">二、樹種結構</a><a href="#s3">三、樹齡與樹高</a>
-  <a href="#s4">四、健康與級別</a><a href="#s5">五、數學模型</a><a href="#s6">六、古樹圖鑑</a>
-  <a href="#s7">七、作業對照</a><a href="#s8">八、資料來源</a>
+  <a href="#s4">四、健康與級別</a><a href="#s5">五、古樹圖鑑</a><a href="#s6">六、資料來源</a>
 </div></nav>
 
 <section id="s1"><div class="wrap">
@@ -263,33 +263,10 @@ code{background:#0A1412;border:1px solid var(--line);padding:2px 7px;border-radi
     三級 646 棵、不分級 5 棵。法律禁止砍伐、破壞或移植古樹——問題不在「有沒有法」，而在城市環境與日常管理。</p></div>
 </div></section>
 
-<section id="s5"><div class="wrap">
-  <h2><span class="num">五 / MATH</span>數學聯動：樹高與冠幅的數學模型</h2>
-  <p class="lead">問題：樹木越高，樹冠是否通常越寬？我們用最小平方法配適線性、二次與冪函數模型，
-  並計算 SSE、SST 與決定係數 R²。切換模型時，公式與 R² 會<b>即時重新運算</b>；圖上每一點都可以點開看是哪一棵樹。</p>
-  <div class="ctrls">
-    <span style="color:var(--mut);font-size:14px">選擇模型：</span>
-    <button class="btn on" data-m="lin">線性 y = bx + a</button>
-    <button class="btn" data-m="quad">二次 y = ax² + bx + c</button>
-    <button class="btn" data-m="pow">冪函數 y = a·xᵇ</button>
-    <button class="btn" data-m="sp">樹種平均（聚合）</button>
-  </div>
-  <div class="card"><div class="svgbox" id="c_scatter"></div></div>
-  <div class="grid2" style="margin-top:20px">
-    <div class="card"><h3 style="margin-top:0">模型計算結果</h3><div id="modelOut"></div></div>
-    <div class="card"><h3 style="margin-top:0">R² 綜合比較</h3><div class="svgbox" id="c_r2"></div></div>
-  </div>
-  <h3>胸徑與樹高：冪函數（生物異速生長律）</h3>
-  <div class="card"><div class="svgbox" id="c_dh"></div></div>
-  <div class="note">研究限制（必須說明）：① 冠幅只有 67 筆有記錄；② 建模樣本 43.3% 為心葉榕；
-  ③ 冠幅受人工修剪主導，不能視為自然生長結果；④ 模型未納入樹種、健康與立地空間等變數。
-  因此模型僅適合作趨勢描述與數學建模示範，不可用於單棵古樹的精確管理決策。</div>
-  <div class="note bad">最重要的發現：把 67 棵先按樹種平均成 19 個點，R² 由 <b>0.016</b> 跳升至 <b>0.185</b>，
-  資料完全沒有增加。可見 R² 會隨資料的<b>聚合程度</b>上升，不同研究的 R² 不能直接比較（範例研究用 50 樹屬平均得 0.241）。</div>
-</div></section>
 
-<section id="s6"><div class="wrap">
-  <h2><span class="num">六 / GALLERY</span>古樹圖鑑：658 棵逐筆資料</h2>
+
+<section id="s5"><div class="wrap">
+  <h2><span class="num">五 / GALLERY</span>古樹圖鑑：658 棵逐筆資料</h2>
   <p class="lead">每一張卡片點開，都可以看到該棵古樹的官方照片、編號、樹種（含學名）、樹齡、樹高、胸徑、冠幅、
   健康狀況、保護級別、所在堂區與地點、GPS 座標，以及它在全澳分布圖上的位置。</p>
   <div class="ctrls">
@@ -337,26 +314,10 @@ code{background:#0A1412;border:1px solid var(--line);padding:2px 7px;border-radi
   <div class="pager" id="pager"></div>
 </div></section>
 
-<section id="s7"><div class="wrap">
-  <h2><span class="num">七 / CHECKLIST</span>作業要求對照表</h2>
-  <p class="lead">逐項對照老師指定的 A–G 內容與研究範圍。</p>
-  <div class="card"><table style="font-size:14.5px">
-    <thead><tr><th>要求</th><th>本報告對應內容</th></tr></thead>
-    <tbody>
-      <tr><td>A　為什麼要保育古樹？</td><td>研究緣起：古樹是跨越明、清、葡治、回歸仍留在原地的生命體；健康與風險數據見第四節</td></tr>
-      <tr><td>B　古樹在澳門的分佈與特徵</td><td>第一節：任務一各堂區數目分佈圖、堂區佔比、GPS 座標分佈圖，三項分佈特徵</td></tr>
-      <tr><td>C　保育古樹需要什麼條件</td><td>保育條件：空間、土壤 pH 6.0–7.5、水氣、管理、制度五項必要條件</td></tr>
-      <tr><td>D　澳門歷史背景與現存古樹的關聯</td><td>堂區即歷史地圖；路環最晚開發故古樹最多，大堂區最早建成故僅 27 棵</td></tr>
-      <tr><td>E　以數學模型擬合數據關係</td><td>第五節：線性／二次／冪函數模型，含斜率、截距、SSE、SST、R² 完整計算，可即時切換驗算</td></tr>
-      <tr><td>F　化學視角分析補充</td><td>土壤酸化（鋁毒害）、水泥水化鹼化（鐵錳固定）、鋪裝造成缺氧，並與堂區健康數據互相印證</td></tr>
-      <tr><td>G　其他相關知識</td><td>樹種結構單一化風險、保護名錄與法規、《文化遺產保護法》第 106 條</td></tr>
-      <tr><td>研究範圍：氣候、土壤、品種、經濟、歷史、旅遊、化學環境、文化推廣</td><td>樹種與土壤化學、歷史與地緣、文化推廣（古樹故事、城市識別）均在報告中對應說明</td></tr>
-      <tr><td>設計方案：延伸至城市綠化、環保節能，配合特區政府政策</td><td>透水鋪裝改造、古樹土壤 pH 監測網、公民科學認養、文創教育、多層次鄉土綠化</td></tr>
-    </tbody></table></div>
-</div></section>
 
-<section id="s8"><div class="wrap">
-  <h2><span class="num">八 / SOURCES</span>資料來源</h2>
+
+<section id="s6"><div class="wrap">
+  <h2><span class="num">六 / SOURCES</span>資料來源</h2>
   <footer>
   <ol>
     <li class="srcline"><b>澳門市政署（IAM）</b>「澳門古樹名木 — 已登記古樹」資料庫，
@@ -1193,160 +1154,6 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 addEventListener('keydown',function(e){if(e.key==='Escape')closeTree();});
 
 /* ---------- 回歸 ---------- */
-function fit(pts,mode){
-  const X=pts.map(function(p){return p[0];}),Y=pts.map(function(p){return p[1];}),n=X.length;
-  const xb=X.reduce(function(a,b){return a+b;},0)/n,yb=Y.reduce(function(a,b){return a+b;},0)/n;
-  if(mode==='quad'){
-    const M=[[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-    for(let i=0;i<n;i++){const x=X[i],y=Y[i],b=[1,x,x*x];
-      for(let r=0;r<3;r++){M[r][3]+=b[r]*y;for(let c2=0;c2<3;c2++)M[r][c2]+=b[r]*b[c2];}}
-    for(let i=0;i<3;i++){let p=i;for(let r=i+1;r<3;r++)if(Math.abs(M[r][i])>Math.abs(M[p][i]))p=r;
-      const tmp=M[i];M[i]=M[p];M[p]=tmp;
-      for(let r=0;r<3;r++){if(r===i)continue;const f=M[r][i]/M[i][i];
-        for(let c2=i;c2<4;c2++)M[r][c2]-=f*M[i][c2];}}
-    const co=[M[0][3]/M[0][0],M[1][3]/M[1][1],M[2][3]/M[2][2]];
-    const f=function(x){return co[0]+co[1]*x+co[2]*x*x;};
-    let sse=0,sst=0;for(let i=0;i<n;i++){sse+=Math.pow(Y[i]-f(X[i]),2);sst+=Math.pow(Y[i]-yb,2);}
-    return {kind:'quad',f:f,co:co,r2:1-sse/sst,sse:sse,sst:sst,n:n,xb:xb,yb:yb};
-  }
-  if(mode==='pow'){
-    const P=pts.filter(function(p){return p[0]>0&&p[1]>0;});
-    const lx=P.map(function(p){return Math.log(p[0]);}),ly=P.map(function(p){return Math.log(p[1]);});
-    const m=P.length,lxb=lx.reduce(function(a,b){return a+b;},0)/m,lyb=ly.reduce(function(a,b){return a+b;},0)/m;
-    let sxy=0,sxx=0;for(let i=0;i<m;i++){sxy+=(lx[i]-lxb)*(ly[i]-lyb);sxx+=Math.pow(lx[i]-lxb,2);}
-    const b=sxy/sxx,a=lyb-b*lxb,f=function(x){return Math.exp(a)*Math.pow(x,b);};
-    const ym=P.reduce(function(s,p){return s+p[1];},0)/m;let sse=0,sst=0;
-    for(let i=0;i<m;i++){sse+=Math.pow(P[i][1]-f(P[i][0]),2);sst+=Math.pow(P[i][1]-ym,2);}
-    return {kind:'pow',f:f,co:[Math.exp(a),b],r2:1-sse/sst,sse:sse,sst:sst,n:m,xb:lxb,yb:ym};
-  }
-  let sxy=0,sxx=0;
-  for(let i=0;i<n;i++){sxy+=(X[i]-xb)*(Y[i]-yb);sxx+=Math.pow(X[i]-xb,2);}
-  const b=sxy/sxx,a=yb-b*xb,f=function(x){return a+b*x;};
-  let sse=0,sst=0;for(let i=0;i<n;i++){sse+=Math.pow(Y[i]-f(X[i]),2);sst+=Math.pow(Y[i]-yb,2);}
-  return {kind:'lin',f:f,co:[a,b],r2:1-sse/sst,sse:sse,sst:sst,n:n,xb:xb,yb:yb,sxy:sxy,sxx:sxx};
-}
-let MODE='lin';
-function scatter(){
-  const W=1000,H=520,S=box('c_scatter',W,H);if(!S)return;
-  const pl=64,pb=54,pt=24,pr=24;
-  let pts;
-  if(MODE==='sp')pts=D.model_sp.points.map(function(p){return [p[0],p[1],p[2],p[3]];});
-  else pts=D.model_hc.points.map(function(p){return [p[0],p[1],p[2],p[3]];});
-  const X=pts.map(function(p){return p[0];}),Y=pts.map(function(p){return p[1];});
-  const x0=Math.min.apply(null,X)-1.2,x1=Math.max.apply(null,X)+1.2;
-  const y0=Math.max(0,Math.min.apply(null,Y)-1.2),y1=Math.max.apply(null,Y)+1.4;
-  const X0=function(v){return pl+(v-x0)/(x1-x0)*(W-pl-pr);};
-  const Y0=function(v){return H-pb-(v-y0)/(y1-y0)*(H-pb-pt);};
-  for(let v=Math.ceil(x0);v<=x1;v+=2){S.appendChild(el('line',{x1:X0(v),y1:pt-6,x2:X0(v),y2:H-pb,
-    stroke:C.line,'stroke-dasharray':'2 5'}));S.appendChild(txt(X0(v),H-pb+20,v,{anchor:'middle',size:11.5}));}
-  for(let v=Math.ceil(y0);v<=y1;v+=2){S.appendChild(el('line',{x1:pl,y1:Y0(v),x2:W-pr,y2:Y0(v),
-    stroke:C.line,'stroke-dasharray':'2 5'}));S.appendChild(txt(pl-10,Y0(v)+4,v,{anchor:'end',size:11.5}));}
-  S.appendChild(el('line',{x1:pl,y1:H-pb,x2:W-pr,y2:H-pb,stroke:C.mut}));
-  S.appendChild(el('line',{x1:pl,y1:pt-6,x2:pl,y2:H-pb,stroke:C.mut}));
-  S.appendChild(txt(W/2,H-12,'樹高 x（m）',{anchor:'middle',size:13.5,fill:C.fg}));
-  S.appendChild(txt(16,pt+120,'冠幅 y（m）',{size:13.5,fill:C.fg,rotate:-90}));
-  const sps=[],showSp=(function(){const u={};pts.forEach(function(p){u[p[2]]=1;});
-    Object.keys(u).forEach(function(k){sps.push(k);});return sps.length<=20;})();
-  pts.forEach(function(p){
-    const i=sps.indexOf(p[2]);
-    const c=el('circle',{cx:X0(p[0]),cy:Y0(p[1]),r:MODE==='sp'?(6+Math.sqrt(p[3]||1)*2.2):6,
-      fill:showSp?PAL[i%PAL.length]:C.acc,opacity:.82,stroke:'#0E1A18','stroke-width':1});
-    c.style.cursor='pointer';
-    hl(c,MODE==='sp'
-      ?('<b>'+p[2]+'</b><br>平均樹高 '+n3(p[0])+' m｜平均冠幅 '+n3(p[1])+' m<br>該樹種 '+p[3]+' 棵')
-      :('<b>'+p[2]+'</b><br>樹高 '+n3(p[0])+' m｜冠幅 '+n3(p[1])+' m<br><span style="color:#93AEA7">點擊查看這棵樹</span>'));
-    if(MODE!=='sp')c.addEventListener('click',function(){
-      const cand=T.filter(function(t){return t[6]===p[0]&&t[7]===p[1]&&t[2]===p[2];});
-      if(cand.length)openTree(cand[0][0]);});
-    S.appendChild(c);});
-  const M=fit(pts,MODE==='quad'?'quad':MODE==='pow'?'pow':'lin');
-  const seg=[];const N=140;
-  for(let i=0;i<=N;i++){const x=x0+(x1-x0)*i/N;
-    seg.push([X0(x),Math.max(pt-6,Math.min(H-pb,Y0(M.f(x))))]);}
-  S.appendChild(el('path',{d:'M'+seg.map(function(p){return p[0]+' '+p[1];}).join(' L'),
-    fill:'none',stroke:C.acc2,'stroke-width':2.6}));
-  S.appendChild(txt(pl+8,pt+4,MODE==='quad'?('y = '+n3(M.co[2])+' + '+n3(M.co[1])+'x + '+n3(M.co[0])+'x²　R² = '+n3(M.r2))
-    :MODE==='pow'?('y = '+n3(M.co[0])+'·x^'+n3(M.co[1])+'　R² = '+n3(M.r2))
-    :('y = '+n3(M.co[1])+'x + '+n3(M.co[0])+'　R² = '+n3(M.r2)),{size:14.5,fill:C.acc2,weight:600}));
-  if(showSp){const tally={};pts.forEach(function(p){tally[p[2]]=(tally[p[2]]||0)+1;});
-    Object.keys(tally).sort(function(a,b){return tally[b]-tally[a];}).slice(0,10).forEach(function(k,i){
-      const y=pt+8+i*19;
-      S.appendChild(el('circle',{cx:W-198,cy:y-4,r:5,fill:PAL[sps.indexOf(k)%PAL.length]}));
-      S.appendChild(txt(W-186,y,k+'（'+tally[k]+'）',{size:11.5,fill:C.fg}));});}
-  const nm={lin:'線性模型（逐棵 67 棵）',quad:'二次模型（逐棵 67 棵）',pow:'冪函數模型',sp:'樹種平均聚合模型（19 種）'}[MODE];
-  document.getElementById('modelOut').innerHTML=
-  '<div style="font-size:15px;color:var(--acc);font-weight:600;margin-bottom:12px">'+nm+'</div>'+
-  '<table style="font-size:13.5px">'+
-   '<tr><td>樣本數 n</td><td><b>'+M.n+'</b></td></tr>'+
-   '<tr><td>平均樹高 x̄</td><td><b>'+n3(M.xb)+' m</b></td></tr>'+
-   '<tr><td>平均冠幅 ȳ</td><td><b>'+n3(M.yb)+' m</b></td></tr>'+
-   (M.sxy!==undefined?('<tr><td>Σ[(xᵢ−x̄)(yᵢ−ȳ)]</td><td><b>'+n3(M.sxy)+'</b></td></tr>'+
-   '<tr><td>Σ[(xᵢ−x̄)²]</td><td><b>'+n3(M.sxx)+'</b></td></tr>'):'')+
-   '<tr><td>回歸方程</td><td><b style="color:var(--acc2)">'+(MODE==='quad'
-      ?('y = '+n3(M.co[2])+' + '+n3(M.co[1])+'x + '+n3(M.co[0])+'x²'):MODE==='pow'
-      ?('y = '+n3(M.co[0])+'·x^'+n3(M.co[1])):('y = '+n3(M.co[1])+'x + '+n3(M.co[0])))+'</b></td></tr>'+
-   '<tr><td>SST（總變異）</td><td><b>'+n3(M.sst)+'</b></td></tr>'+
-   '<tr><td>SSE（未解釋誤差）</td><td><b>'+n3(M.sse)+'</b></td></tr>'+
-   '<tr><td>R² = 1 − SSE/SST</td><td><b style="color:var(--acc);font-size:16px">'+n3(M.r2)+'</b></td></tr>'+
-   '<tr><td>樹高可解釋冠幅變化的比例</td><td><b>'+(M.r2*100).toFixed(1)+'%</b></td></tr>'+
-  '</table>'+
-  '<p style="color:var(--mut);font-size:13px;margin:12px 0 0">'+(MODE==='lin'
-   ?'斜率 0.0835 表示樹高每增加 1 m，冠幅平均只增加 8.4 cm。預測樹高 10 m 得 8.10 m、20 m 得 8.93 m——幾乎是一條水平線。'
-   :MODE==='quad'?'R² 由線性的 0.016 提升至 0.202（12.7 倍）。曲線呈倒 U 形，冠幅在樹高約 18.3 m 附近最大。'
-   :MODE==='pow'?'用於胸徑與樹高的冪函數模型（368 棵）。指數小於 1，符合生物異速生長律：樹木增粗快於長高。'
-   :'資料完全沒有增加，只作了平均，R² 就由 0.016 跳升至 0.185——證明 R² 會隨聚合程度上升。')+'</p>';
-}
-Array.prototype.forEach.call(document.querySelectorAll('[data-m]'),function(b){
-  b.addEventListener('click',function(){MODE=b.dataset.m;
-    Array.prototype.forEach.call(document.querySelectorAll('[data-m]'),function(x){
-      x.classList.toggle('on',x===b);});
-    scatter();});});
-
-function r2bar(){
-  const data=[['線性 樹高→冠幅\n逐棵 n=67',D.model_hc.lin.r2,C.acc3],
-    ['二次 樹高→冠幅\n逐棵 n=67',D.model_hc.quad.r2,C.acc4],
-    ['線性 樹高→冠幅\n樹種平均 n=19',D.model_sp.lin.r2,C.acc],
-    ['冪函數 胸徑→樹高\nn=368',D.model_dh.pwr.r2,'#A78BD6'],
-    ['範例研究 樹高→冠幅\n樹屬平均 n=50',D.example.r2,C.acc2]];
-  const W=560,H=340,S=box('c_r2',W,H);if(!S)return;
-  const pl=48,pb=80,pt=22,mx=Math.max.apply(null,data.map(function(d){return d[1];}))*1.22;
-  const bw=(W-pl-20)/data.length;
-  data.forEach(function(d,i){
-    const h=(H-pb-pt)*(d[1]/mx),x=pl+i*bw+bw*.18,y=H-pb-h;
-    S.appendChild(el('rect',{x:x,y:y,width:bw*.64,height:Math.max(h,1),rx:6,fill:d[2]}));
-    S.appendChild(txt(x+bw*.32,y-8,n3(d[1]).toFixed(3),{anchor:'middle',size:12.5,fill:C.fg,weight:600}));
-    d[0].split('\n').forEach(function(t,k){
-      S.appendChild(txt(x+bw*.32,H-pb+20+k*15,t,{anchor:'middle',size:10.5}));});});
-  S.appendChild(el('line',{x1:pl,y1:H-pb,x2:W-10,y2:H-pb,stroke:C.line}));
-}
-function dhchart(){
-  const W=1000,H=470,S=box('c_dh',W,H);if(!S)return;
-  const pl=64,pb=50,pt=22,pr=24;
-  const P=T.filter(function(t){return t[8]&&t[6];}).map(function(t){return [t[8],t[6],t[0],t[2]];});
-  const x1=Math.max.apply(null,P.map(function(p){return p[0];}))*1.04;
-  const y1=Math.max.apply(null,P.map(function(p){return p[1];}))*1.1;
-  const X0=function(v){return pl+v/x1*(W-pl-pr);},Y0=function(v){return H-pb-v/y1*(H-pb-pt);};
-  for(let v=0;v<=x1;v+=50){S.appendChild(el('line',{x1:X0(v),y1:pt-6,x2:X0(v),y2:H-pb,stroke:C.line,'stroke-dasharray':'2 5'}));
-    S.appendChild(txt(X0(v),H-pb+20,v,{anchor:'middle',size:11.5}));}
-  for(let v=0;v<=y1;v+=5){S.appendChild(el('line',{x1:pl,y1:Y0(v),x2:W-pr,y2:Y0(v),stroke:C.line,'stroke-dasharray':'2 5'}));
-    S.appendChild(txt(pl-10,Y0(v)+4,v,{anchor:'end',size:11.5}));}
-  S.appendChild(el('line',{x1:pl,y1:H-pb,x2:W-pr,y2:H-pb,stroke:C.mut}));
-  S.appendChild(el('line',{x1:pl,y1:pt-6,x2:pl,y2:H-pb,stroke:C.mut}));
-  S.appendChild(txt(W/2,H-10,'胸徑 x（cm）',{anchor:'middle',size:13.5,fill:C.fg}));
-  S.appendChild(txt(16,pt+110,'樹高 y（m）',{size:13.5,fill:C.fg,rotate:-90}));
-  P.forEach(function(p){const c=el('circle',{cx:X0(p[0]),cy:Y0(p[1]),r:3.6,fill:C.acc,opacity:.5});
-    c.style.cursor='pointer';hl(c,'<b>'+p[3]+'</b>　'+p[2]+'<br>胸徑 '+p[0]+' cm｜樹高 '+p[1]+' m<br><span style="color:#93AEA7">點擊查看</span>');
-    c.addEventListener('click',function(){openTree(p[2]);});
-    S.appendChild(c);});
-  const M=fit(P,'pow'),N=140,seg=[];
-  for(let i=0;i<=N;i++){const x=x1*i/N;seg.push([X0(x),Y0(Math.min(M.f(x),y1))]);}
-  S.appendChild(el('path',{d:'M'+seg.map(function(p){return p[0]+' '+p[1];}).join(' L'),fill:'none',stroke:C.acc2,'stroke-width':2.6}));
-  S.appendChild(txt(pl+10,pt+4,'y = '+n3(M.co[0]).toFixed(3)+'·x^'+n3(M.co[1]).toFixed(4)+'　R² = '+n3(M.r2).toFixed(3)+'　n = '+M.n,
-    {size:14.5,fill:C.acc2,weight:600}));
-  S.appendChild(txt(pl+10,pt+26,'同資料比較：線性 0.095 ＜ 二次 0.111 ＜ 冪函數 0.170　（點任一圓點可查看該棵古樹）',{size:12.5}));
-}
-
-/* ---------- 初始化 ---------- */
 const fr=document.getElementById('freg'),fh=document.getElementById('fhealth'),fc=document.getElementById('fcls');
 Object.keys(D.region).forEach(function(r){fr.insertAdjacentHTML('beforeend','<option>'+r+'</option>');});
 ['健康','一般','瀕危'].forEach(function(h){fh.insertAdjacentHTML('beforeend','<option>'+h+'</option>');});
@@ -1429,6 +1236,6 @@ donut('c_health',[['健康',D.health['健康'],'#4FD1A5'],['一般',D.health['�
 hbar('c_cls',[['三級',D.cls['三級'],'#2E9E7E'],['二級',D.cls['二級'],'#E8A33D'],
   ['一級',D.cls['一級'],'#E4705C'],['不分級',D.cls['不分級'],'#8A94A6']],
   {fmt:function(d){return d[1]+' 棵';},click:function(d){setFilter({cls:d[0]});}});
-scatter();r2bar();dhchart();renderCards();
+renderCards();
 </script>
 </body></html>
